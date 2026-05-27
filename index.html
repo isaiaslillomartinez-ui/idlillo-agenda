@@ -8,204 +8,48 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --navy:#1C2D4A;
-  --navy2:#243860;
-  --gold:#C5980A;
-  --gold-light:#FEF7E0;
-  --white:#FFFFFF;
-  --bg:#F4F6F9;
-  --border:#DDE3ED;
-  --text:#1a1a2e;
-  --muted:#6b7a99;
-  --success:#166534;
-  --success-bg:#dcfce7;
-  --radius:14px;
+  --navy:#1C2D4A;--navy2:#243860;--gold:#C5980A;
+  --gold-light:#FEF7E0;--white:#FFFFFF;--bg:#F4F6F9;
+  --border:#DDE3ED;--text:#1a1a2e;--muted:#6b7a99;
+  --success:#166534;--success-bg:#dcfce7;--radius:14px;
 }
-body{
-  font-family:'Barlow',sans-serif;
-  background:var(--bg);
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
-
-/* HEADER */
-header{
-  width:100%;
-  background:var(--navy);
-  padding:18px 24px;
-  display:flex;
-  align-items:center;
-  gap:14px;
-  position:relative;
-  overflow:hidden;
-}
-header::after{
-  content:'';
-  position:absolute;
-  right:-30px; top:-30px;
-  width:160px; height:160px;
-  border-radius:50%;
-  background:rgba(197,152,10,0.12);
-}
-header img{
-  width:54px; height:54px;
-  border-radius:50%;
-  object-fit:cover;
-  border:2px solid var(--gold);
-  flex-shrink:0;
-  position:relative;z-index:1;
-}
+body{font-family:'Barlow',sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column;align-items:center;}
+header{width:100%;background:var(--navy);padding:18px 24px;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;}
+header::after{content:'';position:absolute;right:-30px;top:-30px;width:160px;height:160px;border-radius:50%;background:rgba(197,152,10,0.12);}
+header img{width:54px;height:54px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);flex-shrink:0;position:relative;z-index:1;}
 .header-text{position:relative;z-index:1;}
-.header-text h1{
-  font-family:'Barlow Condensed',sans-serif;
-  font-size:22px;
-  font-weight:700;
-  color:var(--white);
-  letter-spacing:0.5px;
-  line-height:1.1;
-}
-.header-text span{
-  font-size:11px;
-  font-weight:600;
-  color:var(--gold);
-  text-transform:uppercase;
-  letter-spacing:1.2px;
-}
-
-/* MAIN */
-main{
-  width:100%;
-  max-width:480px;
-  padding:24px 16px 40px;
-}
-
-/* CARD */
-.card{
-  background:var(--white);
-  border-radius:var(--radius);
-  border:1px solid var(--border);
-  padding:24px 22px;
-  margin-bottom:16px;
-  box-shadow:0 2px 12px rgba(28,45,74,0.07);
-}
-.card-title{
-  font-family:'Barlow Condensed',sans-serif;
-  font-size:17px;
-  font-weight:700;
-  color:var(--navy);
-  letter-spacing:0.3px;
-  margin-bottom:18px;
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-.card-title::before{
-  content:'';
-  width:4px; height:18px;
-  background:var(--gold);
-  border-radius:2px;
-  flex-shrink:0;
-}
-
-/* FORM */
+.header-text h1{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:var(--white);letter-spacing:0.5px;line-height:1.1;}
+.header-text span{font-size:11px;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:1.2px;}
+main{width:100%;max-width:480px;padding:24px 16px 40px;}
+.card{background:var(--white);border-radius:var(--radius);border:1px solid var(--border);padding:24px 22px;margin-bottom:16px;box-shadow:0 2px 12px rgba(28,45,74,0.07);}
+.card-title{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;color:var(--navy);letter-spacing:0.3px;margin-bottom:18px;display:flex;align-items:center;gap:8px;}
+.card-title::before{content:'';width:4px;height:18px;background:var(--gold);border-radius:2px;flex-shrink:0;}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .field{margin-bottom:14px;}
 .field:last-child{margin-bottom:0;}
-label{
-  display:block;
-  font-size:12px;
-  font-weight:600;
-  color:var(--muted);
-  text-transform:uppercase;
-  letter-spacing:0.7px;
-  margin-bottom:6px;
-}
-input[type=date],input[type=time],input[type=text],textarea{
-  width:100%;
-  padding:11px 14px;
-  border:1.5px solid var(--border);
-  border-radius:10px;
-  font-family:'Barlow',sans-serif;
-  font-size:14px;
-  color:var(--text);
-  background:#fff;
-  outline:none;
-  transition:border-color .2s;
-  -webkit-appearance:none;
-}
+label{display:block;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.7px;margin-bottom:6px;}
+input[type=date],input[type=time],input[type=text],textarea{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:'Barlow',sans-serif;font-size:14px;color:var(--text);background:#fff;outline:none;transition:border-color .2s;-webkit-appearance:none;}
 input:focus,textarea:focus{border-color:var(--navy);}
 textarea{resize:vertical;min-height:90px;line-height:1.5;}
-
-/* DIVIDER */
-.divider{
-  display:flex;align-items:center;gap:10px;
-  margin:18px 0;
-}
+.divider{display:flex;align-items:center;gap:10px;margin:18px 0;}
 .divider span{font-size:12px;color:var(--muted);white-space:nowrap;}
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border);}
-
-/* BUTTONS */
 .btn-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.btn{
-  display:flex;align-items:center;justify-content:center;
-  gap:8px;padding:13px 10px;
-  border:none;border-radius:10px;
-  cursor:pointer;font-family:'Barlow',sans-serif;
-  font-size:14px;font-weight:600;
-  letter-spacing:0.2px;
-  transition:transform .15s, opacity .15s;
-}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 10px;border:none;border-radius:10px;cursor:pointer;font-family:'Barlow',sans-serif;font-size:14px;font-weight:600;letter-spacing:0.2px;transition:transform .15s,opacity .15s;}
 .btn:active{transform:scale(0.97);}
+.btn:disabled{opacity:.6;cursor:not-allowed;}
 .btn-mail{background:var(--navy);color:#fff;}
-.btn-mail:hover{background:var(--navy2);}
+.btn-mail:hover:not(:disabled){background:var(--navy2);}
 .btn-wa{background:#1A6B3C;color:#fff;}
-.btn-wa:hover{background:#145c32;}
+.btn-wa:hover:not(:disabled){background:#145c32;}
 .btn svg{width:18px;height:18px;flex-shrink:0;}
-
-/* ALERTA */
-.alert{
-  display:none;
-  margin-top:14px;
-  padding:12px 16px;
-  border-radius:10px;
-  background:var(--success-bg);
-  border:1px solid #86efac;
-  font-size:13px;
-  color:var(--success);
-  font-weight:500;
-}
+.alert{display:none;margin-top:14px;padding:12px 16px;border-radius:10px;background:var(--success-bg);border:1px solid #86efac;font-size:13px;color:var(--success);font-weight:500;}
 .alert.show{display:block;}
-
-/* ERROR */
-.alert-err{
-  display:none;
-  margin-top:14px;
-  padding:12px 16px;
-  border-radius:10px;
-  background:#fef2f2;
-  border:1px solid #fca5a5;
-  font-size:13px;
-  color:#991b1b;
-  font-weight:500;
-}
+.alert-err{display:none;margin-top:14px;padding:12px 16px;border-radius:10px;background:#fef2f2;border:1px solid #fca5a5;font-size:13px;color:#991b1b;font-weight:500;}
 .alert-err.show{display:block;}
-
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:20px 16px;
-  font-size:11px;
-  color:var(--muted);
-  line-height:1.6;
-}
+footer{text-align:center;padding:20px 16px;font-size:11px;color:var(--muted);line-height:1.6;}
 footer a{color:var(--gold);text-decoration:none;}
-
-@media(max-width:360px){
-  .row2{grid-template-columns:1fr;}
-  .btn-grid{grid-template-columns:1fr;}
-}
+@media(max-width:360px){.row2{grid-template-columns:1fr;}.btn-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -221,7 +65,6 @@ footer a{color:var(--gold);text-decoration:none;}
 <main>
   <div class="card">
     <div class="card-title">Datos de tu cita</div>
-
     <div class="row2">
       <div class="field">
         <label>Fecha</label>
@@ -232,35 +75,30 @@ footer a{color:var(--gold);text-decoration:none;}
         <input type="time" id="hora"/>
       </div>
     </div>
-
     <div class="field">
       <label>Nombre completo</label>
       <input type="text" id="nombre" placeholder="Tu nombre y apellido"/>
     </div>
-
     <div class="field">
       <label>Motivo de la cita</label>
       <textarea id="cita" placeholder="Describe brevemente el motivo de tu visita o consulta..."></textarea>
     </div>
-
     <div class="divider"><span>Selecciona cómo enviar tu solicitud</span></div>
-
     <div class="btn-grid">
-      <button class="btn btn-mail" onclick="enviarCorreo()">
+      <button class="btn btn-mail" id="btn-correo" onclick="enviarCorreo()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
-        Correo
+        Enviar correo
       </button>
       <button class="btn btn-wa" onclick="enviarWhatsApp()">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.77.463 3.432 1.27 4.878L2 22l5.234-1.243A9.955 9.955 0 0 0 12.004 22C17.53 22 22 17.523 22 12.004 22 6.477 17.53 2 12.004 2z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.77.463 3.432 1.27 4.878L2 22l5.234-1.243A9.955 9.955 0 0 0 12.004 22C17.53 22 17.53 2 12.004 2z"/></svg>
         WhatsApp
       </button>
     </div>
-
     <div class="alert" id="alerta"></div>
     <div class="alert-err" id="alerta-err"></div>
   </div>
 
-  <div class="card" style="text-align:center; padding:16px 22px;">
+  <div class="card" style="text-align:center;padding:16px 22px;">
     <p style="font-size:12px;color:var(--muted);margin-bottom:4px;">¿Prefieres contactarnos directamente?</p>
     <a href="mailto:contacto@idlillo.cl" style="font-size:13px;color:var(--navy);font-weight:600;text-decoration:none;display:block;margin-bottom:4px;">✉ contacto@idlillo.cl</a>
     <a href="tel:+56942322193" style="font-size:13px;color:var(--navy);font-weight:600;text-decoration:none;">📞 +56 9 4232 2193</a>
@@ -273,27 +111,23 @@ footer a{color:var(--gold);text-decoration:none;}
 </footer>
 
 <script>
-function getVal(id){return document.getElementById(id).value.trim();}
+// ⚠️ REEMPLAZA esta URL con la URL de tu servicio en Render una vez desplegado
+const API_URL = 'https://TU-SERVICIO.onrender.com/enviar-cita';
 
-function formatFecha(f){
-  if(!f)return'';
-  const[y,m,d]=f.split('-');
-  return d+'/'+m+'/'+y;
-}
+function getVal(id){return document.getElementById(id).value.trim();}
+function formatFecha(f){if(!f)return'';const[y,m,d]=f.split('-');return d+'/'+m+'/'+y;}
 
 function mostrarOk(msg){
   const el=document.getElementById('alerta');
-  el.textContent=msg; el.classList.add('show');
+  el.textContent=msg;el.classList.add('show');
   document.getElementById('alerta-err').classList.remove('show');
-  setTimeout(()=>el.classList.remove('show'),5000);
+  setTimeout(()=>el.classList.remove('show'),6000);
 }
-
 function mostrarErr(msg){
   const el=document.getElementById('alerta-err');
-  el.textContent=msg; el.classList.add('show');
-  setTimeout(()=>el.classList.remove('show'),4000);
+  el.textContent=msg;el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),5000);
 }
-
 function validar(){
   const d={fecha:getVal('fecha'),hora:getVal('hora'),nombre:getVal('nombre'),cita:getVal('cita')};
   if(!d.fecha||!d.hora||!d.nombre||!d.cita){
@@ -303,27 +137,36 @@ function validar(){
   return d;
 }
 
-function enviarCorreo(){
+async function enviarCorreo(){
   const d=validar(); if(!d)return;
-  const s=encodeURIComponent('Solicitud de cita – '+d.nombre+' – '+formatFecha(d.fecha));
-  const b=encodeURIComponent(
-    'Estimado equipo de ID Lillo SpA,\n\n'+
-    'Solicito agendar una cita con los siguientes datos:\n\n'+
-    '• Nombre: '+d.nombre+'\n'+
-    '• Fecha: '+formatFecha(d.fecha)+'\n'+
-    '• Hora: '+d.hora+'\n'+
-    '• Motivo: '+d.cita+'\n\n'+
-    'Quedo atento(a) a su confirmación.\n\nSaludos cordiales.'
-  );
-  window.location.href='mailto:contacto@idlillo.cl?subject='+s+'&body='+b;
-  mostrarOk('✅ Se abrió tu correo con la solicitud lista para enviar.');
+  const btn=document.getElementById('btn-correo');
+  btn.disabled=true; btn.textContent='Enviando...';
+  try{
+    const r=await fetch(API_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({nombre:d.nombre,fecha:formatFecha(d.fecha),hora:d.hora,motivo:d.cita})
+    });
+    const data=await r.json();
+    if(data.ok){
+      mostrarOk('✅ ¡Solicitud enviada! Recibirás confirmación a la brevedad.');
+      document.getElementById('fecha').value='';
+      document.getElementById('hora').value='';
+      document.getElementById('nombre').value='';
+      document.getElementById('cita').value='';
+    } else {
+      mostrarErr('❌ Error al enviar: '+data.error);
+    }
+  }catch(e){
+    mostrarErr('❌ No se pudo conectar con el servidor. Intenta nuevamente.');
+  }
+  btn.disabled=false; btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg> Enviar correo';
 }
 
 function enviarWhatsApp(){
   const d=validar(); if(!d)return;
   const msg=encodeURIComponent(
-    'Hola ID Lillo SpA 👋\n\n'+
-    'Quisiera agendar una cita:\n\n'+
+    'Hola ID Lillo SpA 👋\n\nQuisiera agendar una cita:\n\n'+
     '📅 *Fecha:* '+formatFecha(d.fecha)+'\n'+
     '⏰ *Hora:* '+d.hora+'\n'+
     '👤 *Nombre:* '+d.nombre+'\n'+
