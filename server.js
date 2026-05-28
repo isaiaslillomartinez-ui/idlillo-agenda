@@ -57,7 +57,7 @@ app.post('/enviar-cita', async (req, res) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        from: 'ID Lillo SpA <onboarding@resend.dev>',
+        from: 'ID Lillo SpA <contacto@idlillo.cl>',
         to: ['contacto@idlillo.cl'],
         subject: `Nueva cita: ${nombre} — ${fecha} ${hora}`,
         html: htmlCorreo
@@ -69,7 +69,7 @@ app.post('/enviar-cita', async (req, res) => {
     if (response.ok) {
       res.json({ ok: true, mensaje: 'Correo enviado correctamente.' });
     } else {
-      console.error('Error Resend:', data);
+      console.error('Error Resend:', JSON.stringify(data));
       res.status(500).json({ ok: false, error: data.message || 'Error al enviar.' });
     }
   } catch (err) {
