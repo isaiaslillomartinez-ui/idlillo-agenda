@@ -1,32 +1,49 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
-
+ 
 const app = express();
 app.use(express.json());
 app.use(cors());
-
+ 
 const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 587,
+  host: process.env.SMTP_HOST,
+  port: parseInt(process.env.SMTP_PORT || '587'),
   secure: false,
+  requireTLS: true,
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS
-  }
+  },
+  tls: {
+    rejectUnauthorized: false
+  },
+  connectionTimeout: 10000,
+  greetingTimeout: 10000,
+  socketTimeout: 10000
 });
-
+ 
 app.get('/', (req, res) => {
   res.send('Servidor ID Lillo SpA activo ✅');
 });
-
+ 
+// Ruta de diagnóstico SMTP
+app.get('/test-smtp', async (req, res) => {
+  try {
+    await transporter.verify();
+    res.json({ ok: true, mensaje: 'Conexión SMTP exitosa ✅' });
+  } catch (err) {
+    res.json({ ok: false, error: err.message, code: err.code });
+  }
+});
+ 
 app.post('/enviar-cita', async (req, res) => {
   const { nombre, fecha, hora, motivo } = req.body;
-
+ 
   if (!nombre || !fecha || !hora || !motivo) {
     return res.status(400).json({ ok: false, error: 'Faltan campos obligatorios.' });
   }
-
+ 
   const htmlCorreo = `
     <div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto;border:1px solid #dde3ed;border-radius:12px;overflow:hidden;">
       <div style="background:#1C2D4A;padding:20px 24px;">
@@ -59,20 +76,20 @@ app.post('/enviar-cita', async (req, res) => {
       </div>
     </div>
   `;
-
+ 
   try {
     await transporter.sendMail({
-      from: '"ID Lillo SpA" <idlillo2023@gmail.com>',
+      from: '"ID Lillo SpA" <' + process.env.SMTP_USER + '>',
       to: 'contacto@idlillo.cl',
       subject: `Nueva cita: ${nombre} — ${fecha} ${hora}`,
       html: htmlCorreo
     });
     res.json({ ok: true, mensaje: 'Correo enviado correctamente.' });
   } catch (err) {
-    console.error('Error SMTP:', err.message);
-    res.status(500).json({ ok: false, error: 'No se pudo enviar el correo. Verifica la configuración SMTP.' });
+    console.error('Error SMTP:', err.message, err.code);
+    res.status(500).json({ ok: false, error: err.message, code: err.code });
   }
 });
-
+ 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Servidor activo en puerto ${PORT}`));
