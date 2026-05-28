@@ -1,40 +1,12 @@
 const express = require('express');
-const nodemailer = require('nodemailer');
 const cors = require('cors');
  
 const app = express();
 app.use(express.json());
 app.use(cors());
  
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: parseInt(process.env.SMTP_PORT || '587'),
-  secure: false,
-  requireTLS: true,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS
-  },
-  tls: {
-    rejectUnauthorized: false
-  },
-  connectionTimeout: 10000,
-  greetingTimeout: 10000,
-  socketTimeout: 10000
-});
- 
 app.get('/', (req, res) => {
   res.send('Servidor ID Lillo SpA activo ✅');
-});
- 
-// Ruta de diagnóstico SMTP
-app.get('/test-smtp', async (req, res) => {
-  try {
-    await transporter.verify();
-    res.json({ ok: true, mensaje: 'Conexión SMTP exitosa ✅' });
-  } catch (err) {
-    res.json({ ok: false, error: err.message, code: err.code });
-  }
 });
  
 app.post('/enviar-cita', async (req, res) => {
@@ -78,16 +50,31 @@ app.post('/enviar-cita', async (req, res) => {
   `;
  
   try {
-    await transporter.sendMail({
-      from: '"ID Lillo SpA" <' + process.env.SMTP_USER + '>',
-      to: 'contacto@idlillo.cl',
-      subject: `Nueva cita: ${nombre} — ${fecha} ${hora}`,
-      html: htmlCorreo
+    const response = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        from: 'ID Lillo SpA <onboarding@resend.dev>',
+        to: ['contacto@idlillo.cl'],
+        subject: `Nueva cita: ${nombre} — ${fecha} ${hora}`,
+        html: htmlCorreo
+      })
     });
-    res.json({ ok: true, mensaje: 'Correo enviado correctamente.' });
+ 
+    const data = await response.json();
+ 
+    if (response.ok) {
+      res.json({ ok: true, mensaje: 'Correo enviado correctamente.' });
+    } else {
+      console.error('Error Resend:', data);
+      res.status(500).json({ ok: false, error: data.message || 'Error al enviar.' });
+    }
   } catch (err) {
-    console.error('Error SMTP:', err.message, err.code);
-    res.status(500).json({ ok: false, error: err.message, code: err.code });
+    console.error('Error:', err.message);
+    res.status(500).json({ ok: false, error: err.message });
   }
 });
  
