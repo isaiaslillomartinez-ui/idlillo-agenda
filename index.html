@@ -9,8 +9,8 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
   --navy:#1C2D4A;--navy2:#243860;--gold:#C5980A;
-  --gold-light:#FEF7E0;--white:#FFFFFF;--bg:#F4F6F9;
-  --border:#DDE3ED;--text:#1a1a2e;--muted:#6b7a99;
+  --white:#FFFFFF;--bg:#F4F6F9;--border:#DDE3ED;
+  --text:#1a1a2e;--muted:#6b7a99;
   --success:#166534;--success-bg:#dcfce7;--radius:14px;
 }
 body{font-family:'Barlow',sans-serif;background:var(--bg);min-height:100vh;display:flex;flex-direction:column;align-items:center;}
@@ -24,18 +24,19 @@ main{width:100%;max-width:480px;padding:24px 16px 40px;}
 .card{background:var(--white);border-radius:var(--radius);border:1px solid var(--border);padding:24px 22px;margin-bottom:16px;box-shadow:0 2px 12px rgba(28,45,74,0.07);}
 .card-title{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;color:var(--navy);letter-spacing:0.3px;margin-bottom:18px;display:flex;align-items:center;gap:8px;}
 .card-title::before{content:'';width:4px;height:18px;background:var(--gold);border-radius:2px;flex-shrink:0;}
+.section-label{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin:16px 0 10px;padding-bottom:4px;border-bottom:1px solid #f0f0f0;}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.field{margin-bottom:14px;}
+.field{margin-bottom:12px;}
 .field:last-child{margin-bottom:0;}
-label{display:block;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.7px;margin-bottom:6px;}
-input[type=date],input[type=time],input[type=text],textarea{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:'Barlow',sans-serif;font-size:14px;color:var(--text);background:#fff;outline:none;transition:border-color .2s;-webkit-appearance:none;}
+label{display:block;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.7px;margin-bottom:5px;}
+input[type=date],input[type=time],input[type=text],input[type=tel],textarea{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:'Barlow',sans-serif;font-size:14px;color:var(--text);background:#fff;outline:none;transition:border-color .2s;-webkit-appearance:none;}
 input:focus,textarea:focus{border-color:var(--navy);}
-textarea{resize:vertical;min-height:90px;line-height:1.5;}
+textarea{resize:vertical;min-height:80px;line-height:1.5;}
 .divider{display:flex;align-items:center;gap:10px;margin:18px 0;}
 .divider span{font-size:12px;color:var(--muted);white-space:nowrap;}
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border);}
 .btn-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 10px;border:none;border-radius:10px;cursor:pointer;font-family:'Barlow',sans-serif;font-size:14px;font-weight:600;letter-spacing:0.2px;transition:transform .15s,opacity .15s;}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 10px;border:none;border-radius:10px;cursor:pointer;font-family:'Barlow',sans-serif;font-size:14px;font-weight:600;transition:transform .15s,opacity .15s;}
 .btn:active{transform:scale(0.97);}
 .btn:disabled{opacity:.6;cursor:not-allowed;}
 .btn-mail{background:var(--navy);color:#fff;}
@@ -64,7 +65,29 @@ footer a{color:var(--gold);text-decoration:none;}
 
 <main>
   <div class="card">
-    <div class="card-title">Datos de tu cita</div>
+    <div class="card-title">Solicitud de Cita</div>
+
+    <div class="section-label">📋 Datos del cliente</div>
+    <div class="field">
+      <label>Nombre completo</label>
+      <input type="text" id="nombre" placeholder="Tu nombre y apellido"/>
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label>Teléfono</label>
+        <input type="tel" id="telefono" placeholder="+56 9 1234 5678"/>
+      </div>
+      <div class="field">
+        <label>Empresa</label>
+        <input type="text" id="empresa" placeholder="Nombre de tu empresa"/>
+      </div>
+    </div>
+    <div class="field">
+      <label>Dirección</label>
+      <input type="text" id="direccion" placeholder="Calle, número, ciudad"/>
+    </div>
+
+    <div class="section-label">📅 Datos de la cita</div>
     <div class="row2">
       <div class="field">
         <label>Fecha</label>
@@ -76,13 +99,10 @@ footer a{color:var(--gold);text-decoration:none;}
       </div>
     </div>
     <div class="field">
-      <label>Nombre completo</label>
-      <input type="text" id="nombre" placeholder="Tu nombre y apellido"/>
-    </div>
-    <div class="field">
       <label>Motivo de la cita</label>
       <textarea id="cita" placeholder="Describe brevemente el motivo de tu visita o consulta..."></textarea>
     </div>
+
     <div class="divider"><span>Selecciona cómo enviar tu solicitud</span></div>
     <div class="btn-grid">
       <button class="btn btn-mail" id="btn-correo" onclick="enviarCorreo()">
@@ -90,7 +110,7 @@ footer a{color:var(--gold);text-decoration:none;}
         Enviar correo
       </button>
       <button class="btn btn-wa" onclick="enviarWhatsApp()">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.77.463 3.432 1.27 4.878L2 22l5.234-1.243A9.955 9.955 0 0 0 12.004 22C17.53 22 17.53 2 12.004 2z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.77.463 3.432 1.27 4.878L2 22l5.234-1.243A9.955 9.955 0 0 0 12.004 22C17.53 22 22 17.523 22 12.004 22 6.477 17.53 2 12.004 2z"/></svg>
         WhatsApp
       </button>
     </div>
@@ -111,7 +131,6 @@ footer a{color:var(--gold);text-decoration:none;}
 </footer>
 
 <script>
-// ⚠️ REEMPLAZA esta URL con la URL de tu servicio en Render una vez desplegado
 const API_URL = 'https://idlillo-agenda.onrender.com/enviar-cita';
 
 function getVal(id){return document.getElementById(id).value.trim();}
@@ -129,8 +148,16 @@ function mostrarErr(msg){
   setTimeout(()=>el.classList.remove('show'),5000);
 }
 function validar(){
-  const d={fecha:getVal('fecha'),hora:getVal('hora'),nombre:getVal('nombre'),cita:getVal('cita')};
-  if(!d.fecha||!d.hora||!d.nombre||!d.cita){
+  const d={
+    nombre:getVal('nombre'),
+    telefono:getVal('telefono'),
+    empresa:getVal('empresa'),
+    direccion:getVal('direccion'),
+    fecha:getVal('fecha'),
+    hora:getVal('hora'),
+    cita:getVal('cita')
+  };
+  if(!d.nombre||!d.telefono||!d.empresa||!d.direccion||!d.fecha||!d.hora||!d.cita){
     mostrarErr('⚠️ Por favor completa todos los campos antes de continuar.');
     return null;
   }
@@ -145,31 +172,42 @@ async function enviarCorreo(){
     const r=await fetch(API_URL,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({nombre:d.nombre,fecha:formatFecha(d.fecha),hora:d.hora,motivo:d.cita})
+      body:JSON.stringify({
+        nombre:d.nombre,
+        telefono:d.telefono,
+        empresa:d.empresa,
+        direccion:d.direccion,
+        fecha:formatFecha(d.fecha),
+        hora:d.hora,
+        motivo:d.cita
+      })
     });
     const data=await r.json();
     if(data.ok){
       mostrarOk('✅ ¡Solicitud enviada! Recibirás confirmación a la brevedad.');
-      document.getElementById('fecha').value='';
-      document.getElementById('hora').value='';
-      document.getElementById('nombre').value='';
-      document.getElementById('cita').value='';
+      ['nombre','telefono','empresa','direccion','fecha','hora','cita'].forEach(id=>{
+        document.getElementById(id).value='';
+      });
     } else {
       mostrarErr('❌ Error al enviar: '+data.error);
     }
   }catch(e){
     mostrarErr('❌ No se pudo conectar con el servidor. Intenta nuevamente.');
   }
-  btn.disabled=false; btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg> Enviar correo';
+  btn.disabled=false;
+  btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg> Enviar correo';
 }
 
 function enviarWhatsApp(){
   const d=validar(); if(!d)return;
   const msg=encodeURIComponent(
     'Hola ID Lillo SpA 👋\n\nQuisiera agendar una cita:\n\n'+
+    '👤 *Nombre:* '+d.nombre+'\n'+
+    '📞 *Teléfono:* '+d.telefono+'\n'+
+    '🏢 *Empresa:* '+d.empresa+'\n'+
+    '📍 *Dirección:* '+d.direccion+'\n'+
     '📅 *Fecha:* '+formatFecha(d.fecha)+'\n'+
     '⏰ *Hora:* '+d.hora+'\n'+
-    '👤 *Nombre:* '+d.nombre+'\n'+
     '📝 *Motivo:* '+d.cita+'\n\n'+
     '¿Está disponible ese horario? Muchas gracias.'
   );
